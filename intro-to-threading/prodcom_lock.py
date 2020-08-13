@@ -21,11 +21,10 @@ class Pipeline:
         logging.debug("%s:about to acquire getlock", name)
         self.consumer_lock.acquire()
         logging.debug("%s:have getlock", name)
-        message = self.message
         logging.debug("%s:about to release setlock", name)
         self.producer_lock.release()
         logging.debug("%s:setlock released", name)
-        return message
+        return self.message
 
     def set_message(self, message, name):
         logging.debug("%s:about to acquire setlock", name)
@@ -39,7 +38,7 @@ class Pipeline:
 
 def producer(pipeline):
     """Pretend we're getting a message from the network."""
-    for index in range(10):
+    for _ in range(10):
         message = random.randint(1, 101)
         logging.info("Producer got message: %s", message)
         pipeline.set_message(message, "Producer")

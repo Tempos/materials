@@ -20,11 +20,10 @@ class Pipeline:
         logging.debug("%s:about to acquire getlock", name)
         self._get_lock.acquire()
         logging.debug("%s:have getlock", name)
-        value = self.value
         logging.debug("%s:about to release setlock", name)
         self._set_lock.release()
         logging.debug("%s:setlock released", name)
-        return value
+        return self.value
 
     def set_value(self, value, name):
         logging.debug("%s:about to acquire setlock", name)

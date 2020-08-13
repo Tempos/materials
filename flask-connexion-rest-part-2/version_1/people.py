@@ -20,8 +20,7 @@ def read_all():
 
     # Serialize the data for the response
     person_schema = PersonSchema(many=True)
-    data = person_schema.dump(people).data
-    return data
+    return person_schema.dump(people).data
 
 
 def read_one(person_id):
